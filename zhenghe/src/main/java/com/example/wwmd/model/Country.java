@@ -1,0 +1,96 @@
+package com.example.wwmd.model;
+
+import java.io.Serializable;
+import javax.persistence.*;
+
+@Table(name = "`country`")
+public class Country extends BaseEntity implements Serializable {
+    /**
+     * 主键
+     */
+    @Id
+    @Column(name = "`Id`")
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Integer id;
+
+    /**
+     * 名称
+     */
+    @Column(name = "`countryname`")
+    private String countryname;
+
+    /**
+     * 代码
+     */
+    @Column(name = "`countrycode`")
+    private String countrycode;
+
+    private static final long serialVersionUID = 1L;
+
+    /**
+     * 获取主键
+     *
+     * @return Id - 主键
+     */
+    public Integer getId() {
+        return id;
+    }
+
+    /**
+     * 设置主键
+     *
+     * @param id 主键
+     */
+    public void setId(Integer id) {
+        this.id = id;
+    }
+
+    /**
+     * 获取名称
+     *
+     * @return countryname - 名称
+     */
+    public String getCountryname() {
+        return countryname;
+    }
+
+    /**
+     * 设置名称
+     *
+     * @param countryname 名称
+     */
+    public void setCountryname(String countryname) {
+        this.countryname = countryname;
+    }
+
+    /**
+     * 获取代码
+     *
+     * @return countrycode - 代码
+     */
+    public String getCountrycode() {
+        return countrycode;
+    }
+
+    /**
+     * 设置代码
+     *
+     * @param countrycode 代码
+     */
+    public void setCountrycode(String countrycode) {
+        this.countrycode = countrycode;
+    }
+
+
+    @Override
+    public String toString() {
+        final StringBuilder sb = new StringBuilder("Country{");
+        sb.append("id=").append(id);
+        sb.append(", countryname='").append(countryname).append('\'');
+        sb.append(", countrycode='").append(countrycode).append('\'');
+        sb.append(", page='").append(super.getPage()).append('\'');
+        sb.append(", rows='").append(super.getRows()).append('\'');
+        sb.append('}');
+        return sb.toString();
+    }
+}

@@ -1,0 +1,53 @@
+spring:
+  datasource:
+    password: root
+    druid:
+      min-idle: 1
+      test-on-borrow: true
+      stat-view-servlet:
+        allow: true
+      max-active: 20
+      initial-size: 1
+    driver-class-name: com.mysql.jdbc.Driver
+    url: jdbc:mysql://localhost:3306/test?useSSL=false
+    username: root
+  redis:
+    password: yidaidev
+    database: 0
+    port: 6379
+    host: 192.168.1.212
+    timeout: 10000
+    jedis:
+      pool:
+        max-idle: 8
+        min-idle: 2
+        # 连接池最大连接数（使用负值表示没有限制）
+        max-active: 100
+        # 连接池最大阻塞等待时间（使用负值表示没有限制）
+        max-wait: 10000
+  resources:
+    ##    cachePeriod: 60
+    #    chain:
+    #      cache: true
+    #      gzipped: true
+    #      strategy:
+    #        fixed:
+    #          paths: /static
+    #          version: 1.0.0
+    #          enabled: true
+    #        content:
+    #          enable: true
+    #          paths: /**
+    # 设置静态资源的存放地址 拦截器的配置把默认处理静态资源的配置给覆盖了，导致失效
+    static-locations: classpath:/static/
+server:
+  port: 9090
+debug: true
+logging:
+  level:
+    tk:
+      mybatis:
+        springboot:
+          mapper: trace
+    root: warn
+

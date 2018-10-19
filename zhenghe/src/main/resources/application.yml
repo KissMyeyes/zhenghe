@@ -1,0 +1,22 @@
+spring:
+  freemarker:
+    cache: false
+    request-context-attribute: request
+  profiles:
+    active: dev
+  mvc:
+    view:
+      prefix: /templates/
+      suffix: .ftl
+pagehelper:
+  supportMethodsArguments: true
+  reasonable: true
+  helperDialect: mysql
+  params: count=countSql
+mybatis:
+  mapper-locations: classpath:mapper/*.xml
+  type-aliases-package: tk.mybatis.springboot.model
+mapper:
+  identity: MYSQL
+  not-empty: false
+#  mappers: tk.mybatis.springboot.util.MyMapper

@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE generatorConfiguration
+        PUBLIC "-//mybatis.org//DTD MyBatis Generator Configuration 1.0//EN"
+        "http://mybatis.org/dtd/mybatis-generator-config_1_0.dtd">
+
+<generatorConfiguration>
+    <properties resource="application-dev.properties"/><!--引入配置文件动态配置，下文用到。-->
+
+    <context id="Mysql" targetRuntime="MyBatis3Simple" defaultModelType="flat">
+        <property name="beginningDelimiter" value="`"/>
+        <property name="endingDelimiter" value="`"/>
+
+        <!--tk.mybatis.mapper  的额外配置-->
+        <plugin type="tk.mybatis.mapper.generator.MapperPlugin">
+            <property name="mappers" value="tk.mybatis.mapper.common.Mapper"/><!--Mapper 文件生成来源，可以指定继承类去继承-->
+            <property name="caseSensitive" value="true"/>  <!--区分大小写-->
+            <property name="forceAnnotation" value="true"/><!--强制生成注解-->
+            <property name="beginningDelimiter" value="`"/><!--关键字的情况下适用，开始和结束分隔符-->
+            <property name="endingDelimiter" value="`"/>
+            <!--useMapperCommentGenerator   使用通用 Mapper 提供的注释工具，默认 true 使用-->
+        </plugin>
+
+        <!-- 生成的pojo，将implements Serializable -->
+        <plugin type="org.mybatis.generator.plugins.SerializablePlugin"></plugin>
+        <!-- 是否去除自动生成的注释 true：是 ： false:否 -->
+        <commentGenerator>
+            <property name="suppressAllComments" value="true" />
+            <property name="suppressDate" value="true" />
+            <property name="addRemarkComments" value="true" /><!--使用字段注释，有bug-->
+        </commentGenerator>
+
+        <!--动态配置数据库连接-->
+        <jdbcConnection driverClass="${spring.datasource.driver-class-name}"
+                        connectionURL="${spring.datasource.url}"
+                        userId="${spring.datasource.username}"
+                        password="${spring.datasource.password}">
+        </jdbcConnection>
+
+        <!-- 默认false，把JDBC DECIMAL 和 NUMERIC 类型解析为 Integer true，把JDBC DECIMAL 和
+			NUMERIC 类型解析为java.math.BigDecimal -->
+        <javaTypeResolver>
+            <property name="forceBigDecimals" value="true" />
+        </javaTypeResolver>
+
+        <!--生成POJO 文件-->
+        <javaModelGenerator targetPackage="com.example.wwmd.model" targetProject="src/main/java"/>
+        <!--生成mapper xml 文件-->
+        <sqlMapGenerator targetPackage="mybatis" targetProject="src/main/resources"/>
+        <!--生成Mapper 接口文件-->
+        <javaClientGenerator targetPackage="com.example.wwmd.dao" targetProject="src/main/java"
+                             type="XMLMAPPER"/>
+
+        <!--匹配所有表-->
+        <table tableName="%">
+            <!--mysql 配置，主键注解策略，生成策略-->
+            <generatedKey column="id" sqlStatement="Mysql" identity="true"/>
+            <!--oracle 配置-->
+            <!--<generatedKey column="id" sqlStatement="select SEQ_{1}.nextval from dual" identity="false" type="pre"/>-->
+        </table>
+        <!--<table schema="yidai" tableName="message_user">-->
+             <!--使用特定类型映射某个字段，自动生成类型有问题的时候用到-->
+             <!--<columnOverride column="data_text" javaType="java.lang.String" jdbcType="VARCHAR" />-->
+        <!--</table>-->
+    </context>
+</generatorConfiguration>
