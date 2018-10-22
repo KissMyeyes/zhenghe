@@ -35,6 +35,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import javax.servlet.http.HttpServletRequest;
 import java.util.List;
 
 
@@ -50,7 +51,8 @@ public class CountryController {
     private CountryService countryService;
 
     @RequestMapping
-    public ModelAndView getAll(Country country) {
+    public ModelAndView getAll(Country country, HttpServletRequest req) {
+        req.getSession().setAttribute("testKey", "testValue");
         ModelAndView result = new ModelAndView("index");
         List<Country> countryList = countryService.getAllByWeekend(country);
         result.addObject("pageInfo", new PageInfo<Country>(countryList));

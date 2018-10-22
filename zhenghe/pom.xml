@@ -54,6 +54,12 @@
             <artifactId>spring-boot-starter-test</artifactId>
             <scope>test</scope>
         </dependency>
+        <!-- Spring session -->
+        <dependency>
+            <groupId>org.springframework.session</groupId>
+            <!--<artifactId>spring-session-data-mongodb</artifactId>-->
+            <artifactId>spring-session-data-redis</artifactId>
+        </dependency>
         <!--支持热部署-->
         <dependency>
             <groupId>org.springframework.boot</groupId>
