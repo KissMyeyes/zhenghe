@@ -4,6 +4,7 @@ spring:
     request-context-attribute: request
   profiles:
     active: dev
+    include: shiro
   mvc:
     view:
       prefix: /templates/
