@@ -1,7 +1,10 @@
 package com.example.wwmd.model;
 
-import java.io.Serializable;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import javax.persistence.*;
+import java.io.Serializable;
+import java.util.List;
 
 @Table(name = "`sys_user`")
 public class User extends BaseEntity implements Serializable {
@@ -29,6 +32,7 @@ public class User extends BaseEntity implements Serializable {
      * 密码
      */
     @Column(name = "`password`")
+    @JsonIgnore
     private String password;
 
     /**
@@ -41,7 +45,17 @@ public class User extends BaseEntity implements Serializable {
      * 账号是否锁定，1：锁定，0未锁定
      */
     @Column(name = "`locked`")
-    private String locked;
+    private Boolean locked;
+
+    private List<Role> roles;
+
+    public List<Role> getRoles() {
+        return roles;
+    }
+
+    public void setRoles(List<Role> roles) {
+        this.roles = roles;
+    }
 
     private static final long serialVersionUID = 1L;
 
@@ -140,7 +154,7 @@ public class User extends BaseEntity implements Serializable {
      *
      * @return locked - 账号是否锁定，1：锁定，0未锁定
      */
-    public String getLocked() {
+    public Boolean getLocked() {
         return locked;
     }
 
@@ -149,7 +163,7 @@ public class User extends BaseEntity implements Serializable {
      *
      * @param locked 账号是否锁定，1：锁定，0未锁定
      */
-    public void setLocked(String locked) {
+    public void setLocked(Boolean locked) {
         this.locked = locked;
     }
 }

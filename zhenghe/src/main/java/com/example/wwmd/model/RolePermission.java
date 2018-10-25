@@ -1,10 +1,10 @@
 package com.example.wwmd.model;
 
-import java.io.Serializable;
 import javax.persistence.*;
+import java.io.Serializable;
 
 @Table(name = "`sys_role_permission`")
-public class SysRolePermission extends BaseEntity implements Serializable {
+public class RolePermission extends BaseEntity implements Serializable {
     @Id
     @Column(name = "`id`")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
