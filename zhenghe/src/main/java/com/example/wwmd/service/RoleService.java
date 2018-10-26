@@ -1,6 +1,6 @@
 package com.example.wwmd.service;
 
-import com.example.wwmd.dao.mapper.SysRoleMapper;
+import com.example.wwmd.dao.mapper.RoleMapper;
 import com.example.wwmd.model.Role;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -13,7 +13,7 @@ import java.util.List;
 @Service
 public class RoleService {
     @Autowired
-    private SysRoleMapper sysRoleMapper;
+    private RoleMapper sysRoleMapper;
 
     /**
      * 模拟根据用户id查询返回用户的所有角色，实际查询语句参考：

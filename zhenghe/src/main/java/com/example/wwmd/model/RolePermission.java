@@ -3,7 +3,7 @@ package com.example.wwmd.model;
 import javax.persistence.*;
 import java.io.Serializable;
 
-@Table(name = "`sys_role_permission`")
+@Table(name = "`role_permission`")
 public class RolePermission extends BaseEntity implements Serializable {
     @Id
     @Column(name = "`id`")
@@ -13,14 +13,14 @@ public class RolePermission extends BaseEntity implements Serializable {
     /**
      * 角色id
      */
-    @Column(name = "`sys_role_id`")
-    private Integer sysRoleId;
+    @Column(name = "`role_id`")
+    private Integer roleId;
 
     /**
      * 权限id
      */
-    @Column(name = "`sys_permission_id`")
-    private Integer sysPermissionId;
+    @Column(name = "`permission_id`")
+    private Integer permissionId;
 
     private static final long serialVersionUID = 1L;
 
@@ -41,36 +41,36 @@ public class RolePermission extends BaseEntity implements Serializable {
     /**
      * 获取角色id
      *
-     * @return sys_role_id - 角色id
+     * @return role_id - 角色id
      */
-    public Integer getSysRoleId() {
-        return sysRoleId;
+    public Integer getRoleId() {
+        return roleId;
     }
 
     /**
      * 设置角色id
      *
-     * @param sysRoleId 角色id
+     * @param roleId 角色id
      */
-    public void setSysRoleId(Integer sysRoleId) {
-        this.sysRoleId = sysRoleId;
+    public void setRoleId(Integer roleId) {
+        this.roleId = roleId;
     }
 
     /**
      * 获取权限id
      *
-     * @return sys_permission_id - 权限id
+     * @return permission_id - 权限id
      */
-    public Integer getSysPermissionId() {
-        return sysPermissionId;
+    public Integer getPermissionId() {
+        return permissionId;
     }
 
     /**
      * 设置权限id
      *
-     * @param sysPermissionId 权限id
+     * @param permissionId 权限id
      */
-    public void setSysPermissionId(Integer sysPermissionId) {
-        this.sysPermissionId = sysPermissionId;
+    public void setPermissionId(Integer permissionId) {
+        this.permissionId = permissionId;
     }
 }

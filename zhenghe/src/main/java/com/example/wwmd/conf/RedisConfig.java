@@ -86,7 +86,7 @@ public class RedisConfig extends CachingConfigurerSupport {
      * 实际测试发现默认注入的RedisCacheManager操作缓存用的是RedisTemplate<Object, Object>，因此我们需要自定义cacheManager，替换掉默认的序列化器。
      * <p>
      * 所以上面redisTemplate 的配置在spring Cache 的 @Cacheable 注解中是不会生效的。
-     * redisTemplate 应用场景更倾向于手动操作Redis时的的一个引用。
+     * redisTemplate 应用场景更倾向于手动操作Redis时的的一个实例。
      *
      * @param factory
      * @return

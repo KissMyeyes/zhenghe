@@ -1,20 +1,20 @@
 package com.example.wwmd.model;
 
-import java.io.Serializable;
 import javax.persistence.*;
+import java.io.Serializable;
 
-@Table(name = "`sys_user_role`")
+@Table(name = "`user_role`")
 public class UserRole extends BaseEntity implements Serializable {
     @Id
     @Column(name = "`id`")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
-    @Column(name = "`sys_user_id`")
-    private Long sysUserId;
+    @Column(name = "`user_id`")
+    private Long userId;
 
-    @Column(name = "`sys_role_id`")
-    private Integer sysRoleId;
+    @Column(name = "`role_id`")
+    private Integer roleId;
 
     private static final long serialVersionUID = 1L;
 
@@ -33,30 +33,30 @@ public class UserRole extends BaseEntity implements Serializable {
     }
 
     /**
-     * @return sys_user_id
+     * @return user_id
      */
-    public Long getSysUserId() {
-        return sysUserId;
+    public Long getUserId() {
+        return userId;
     }
 
     /**
-     * @param sysUserId
+     * @param userId
      */
-    public void setSysUserId(Long sysUserId) {
-        this.sysUserId = sysUserId;
+    public void setUserId(Long userId) {
+        this.userId = userId;
     }
 
     /**
-     * @return sys_role_id
+     * @return role_id
      */
-    public Integer getSysRoleId() {
-        return sysRoleId;
+    public Integer getRoleId() {
+        return roleId;
     }
 
     /**
-     * @param sysRoleId
+     * @param roleId
      */
-    public void setSysRoleId(Integer sysRoleId) {
-        this.sysRoleId = sysRoleId;
+    public void setRoleId(Integer roleId) {
+        this.roleId = roleId;
     }
 }

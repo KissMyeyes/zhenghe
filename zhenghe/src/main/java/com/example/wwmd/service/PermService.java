@@ -1,8 +1,12 @@
 package com.example.wwmd.service;
 
+import com.example.wwmd.dao.mapper.PermissionMapper;
+import com.example.wwmd.model.Permission;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 /**
@@ -10,7 +14,8 @@ import java.util.Set;
  */
 @Service
 public class PermService {
-
+    @Autowired
+    private PermissionMapper permissionMapper;
     /**
      * 模拟根据用户id查询返回用户的所有权限，实际查询语句参考：
      * SELECT p.pval FROM perm p, role_perm rp, user_role ur
@@ -34,4 +39,7 @@ public class PermService {
         return perms;
     }
 
+    public List<Permission> findUserPermissions(Long userId) {
+        return permissionMapper.findUserPermissions(userId);
+    }
 }
