@@ -27,6 +27,8 @@ spring boot
     
     Shiro作为权限管理系统。
     权限系统关系为传统的 ：用户-角色-资源  模型。
-    同时使用shiro-redis开源组件，，Shiro 登录 session 集群共享。
+    同时使用shiro-redis开源组件，，以支持分布式环境下的Session共享
+
+前端使用 FreeMaker 和 thymeleaf 
     
-    
+    spring boot推荐支持,因为spring boot是快速开发,而thymeleaf又是原型即页面,所以从理念是接近的
