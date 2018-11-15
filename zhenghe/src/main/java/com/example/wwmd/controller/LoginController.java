@@ -1,10 +1,13 @@
 package com.example.wwmd.controller;
 
+import com.example.wwmd.common.WwmdProperties;
 import com.example.wwmd.domain.ResultView;
 import com.example.wwmd.enums.ErrorCodeEnum;
 import com.example.wwmd.model.User;
 import com.example.wwmd.service.UserService;
 import com.example.wwmd.util.MD5Utils;
+import com.example.wwmd.util.vcode.Captcha;
+import com.example.wwmd.util.vcode.GifCaptcha;
 import org.apache.shiro.authc.*;
 import org.apache.shiro.session.Session;
 import org.apache.shiro.subject.Subject;
@@ -19,6 +22,10 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
+
 @Controller
 public class LoginController extends BaseController {
 
@@ -26,6 +33,8 @@ public class LoginController extends BaseController {
 
     private static final String CODE_KEY = "_code";
 
+    @Autowired
+    private WwmdProperties wwmdProperties;
 
     @Autowired
     private UserService userService;
@@ -67,26 +76,26 @@ public class LoginController extends BaseController {
         }
     }
 
-//    @GetMapping(value = "gifCode")
-//    public void getGifCode(HttpServletResponse response, HttpServletRequest request) {
-//        try {
-//            response.setHeader("Pragma", "No-cache");
-//            response.setHeader("Cache-Control", "no-cache");
-//            response.setDateHeader("Expires", 0);
-//            response.setContentType("image/gif");
-//
-//            Captcha captcha = new GifCaptcha(
-//                    febsProperties.getValidateCode().getWidth(),
-//                    febsProperties.getValidateCode().getHeight(),
-//                    febsProperties.getValidateCode().getLength());
-//            HttpSession session = request.getSession(true);
-//            captcha.out(response.getOutputStream());
-//            session.removeAttribute(CODE_KEY);
-//            session.setAttribute(CODE_KEY, captcha.text().toLowerCase());
-//        } catch (Exception e) {
-//            log.error("图形验证码生成失败", e);
-//        }
-//    }
+    @GetMapping(value = "gifCode")
+    public void getGifCode(HttpServletResponse response, HttpServletRequest request) {
+        try {
+            response.setHeader("Pragma", "No-cache");
+            response.setHeader("Cache-Control", "no-cache");
+            response.setDateHeader("Expires", 0);
+            response.setContentType("image/gif");
+
+            Captcha captcha = new GifCaptcha(
+                    wwmdProperties.getValidateCode().getWidth(),
+                    wwmdProperties.getValidateCode().getHeight(),
+                    wwmdProperties.getValidateCode().getLength());
+            HttpSession session = request.getSession(true);
+            captcha.out(response.getOutputStream());
+            session.removeAttribute(CODE_KEY);
+            session.setAttribute(CODE_KEY, captcha.text().toLowerCase());
+        } catch (Exception e) {
+            log.error("图形验证码生成失败", e);
+        }
+    }
 
     @RequestMapping("/")
     public String redirectIndex() {

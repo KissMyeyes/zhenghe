@@ -8,7 +8,7 @@ spring:
   mvc:
     view:
       prefix: /templates/
-      suffix: .ftl
+      suffix: .ftl,.html
 pagehelper:
   supportMethodsArguments: true
   reasonable: true
