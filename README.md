@@ -25,4 +25,8 @@ spring boot
     
 集成Shiro
     
+    Shiro作为权限管理系统。
+    权限系统关系为传统的 ：用户-角色-资源  模型。
+    同时使用shiro-redis开源组件，，Shiro 登录 session 集群共享。
+    
     
