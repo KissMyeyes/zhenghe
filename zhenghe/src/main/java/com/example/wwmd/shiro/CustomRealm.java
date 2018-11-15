@@ -9,14 +9,11 @@ import com.example.wwmd.service.PermService;
 import com.example.wwmd.service.RoleService;
 import com.example.wwmd.service.UserService;
 import org.apache.shiro.authc.*;
-import org.apache.shiro.authc.credential.HashedCredentialsMatcher;
 import org.apache.shiro.authz.AuthorizationException;
 import org.apache.shiro.authz.AuthorizationInfo;
 import org.apache.shiro.authz.SimpleAuthorizationInfo;
-import org.apache.shiro.crypto.hash.Sha256Hash;
 import org.apache.shiro.realm.AuthorizingRealm;
 import org.apache.shiro.subject.PrincipalCollection;
-import org.apache.shiro.util.ByteSource;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import java.util.Arrays;
@@ -41,14 +38,14 @@ public class CustomRealm extends AuthorizingRealm {
     private PermService permService;
 
     //告诉shiro如何根据获取到的用户信息中的密码和盐值来校验密码
-    {
-        //设置用于匹配密码的CredentialsMatcher
-        HashedCredentialsMatcher hashMatcher = new HashedCredentialsMatcher();
-        hashMatcher.setHashAlgorithmName(Sha256Hash.ALGORITHM_NAME);
-        hashMatcher.setStoredCredentialsHexEncoded(false);
-        hashMatcher.setHashIterations(1024);
-        this.setCredentialsMatcher(hashMatcher);
-    }
+//    {
+//        //设置用于匹配密码的CredentialsMatcher
+//        HashedCredentialsMatcher hashMatcher = new HashedCredentialsMatcher();
+//        hashMatcher.setHashAlgorithmName(Sha256Hash.ALGORITHM_NAME);
+//        hashMatcher.setStoredCredentialsHexEncoded(false);
+//        hashMatcher.setHashIterations(1024);
+//        this.setCredentialsMatcher(hashMatcher);
+//    }
 
     /**
      * 授权模块，获取用户角色和权限
@@ -116,7 +113,7 @@ public class CustomRealm extends AuthorizingRealm {
         Set<String> permissionSet = new HashSet<>();
         for (Permission permission : permissionList) {
             // 处理用户多权限 用逗号分隔
-            permissionSet.addAll(Arrays.asList(permission.getPerCode().split(",")));
+            permissionSet.addAll(Arrays.asList(permission.getPerms().split(",")));
         }
         simpleAuthorizationInfo.setStringPermissions(permissionSet);
         return simpleAuthorizationInfo;
@@ -185,58 +182,58 @@ public class CustomRealm extends AuthorizingRealm {
         }
 //        return new SimpleAuthenticationInfo(user, password, getName());
         SimpleAuthenticationInfo info = new SimpleAuthenticationInfo(user, password, getName());
-        if (user.getSalt() != null) {
-            info.setCredentialsSalt(ByteSource.Util.bytes(user.getSalt()));
-        }
+//        if (user.getSalt() != null) {
+//            info.setCredentialsSalt(ByteSource.Util.bytes(user.getSalt()));
+//        }
         return info;
     }
 
-
-    /**
-     * 重写方法,清除当前用户的的 授权缓存
-     *
-     * @param principals
-     */
-    @Override
-    public void clearCachedAuthorizationInfo(PrincipalCollection principals) {
-        super.clearCachedAuthorizationInfo(principals);
-    }
-
-    /**
-     * 重写方法，清除当前用户的 认证缓存
-     *
-     * @param principals
-     */
-    @Override
-    public void clearCachedAuthenticationInfo(PrincipalCollection principals) {
-        super.clearCachedAuthenticationInfo(principals);
-    }
-
-    @Override
-    public void clearCache(PrincipalCollection principals) {
-        super.clearCache(principals);
-    }
-
-    /**
-     * 自定义方法：清除所有 授权缓存
-     */
-    public void clearAllCachedAuthorizationInfo() {
-        getAuthorizationCache().clear();
-    }
-
-    /**
-     * 自定义方法：清除所有 认证缓存
-     */
-    public void clearAllCachedAuthenticationInfo() {
-        getAuthenticationCache().clear();
-    }
-
-    /**
-     * 自定义方法：清除所有的  认证缓存  和 授权缓存
-     */
-    public void clearAllCache() {
-        clearAllCachedAuthenticationInfo();
-        clearAllCachedAuthorizationInfo();
-    }
+//
+//    /**
+//     * 重写方法,清除当前用户的的 授权缓存
+//     *
+//     * @param principals
+//     */
+//    @Override
+//    public void clearCachedAuthorizationInfo(PrincipalCollection principals) {
+//        super.clearCachedAuthorizationInfo(principals);
+//    }
+//
+//    /**
+//     * 重写方法，清除当前用户的 认证缓存
+//     *
+//     * @param principals
+//     */
+//    @Override
+//    public void clearCachedAuthenticationInfo(PrincipalCollection principals) {
+//        super.clearCachedAuthenticationInfo(principals);
+//    }
+//
+//    @Override
+//    public void clearCache(PrincipalCollection principals) {
+//        super.clearCache(principals);
+//    }
+//
+//    /**
+//     * 自定义方法：清除所有 授权缓存
+//     */
+//    public void clearAllCachedAuthorizationInfo() {
+//        getAuthorizationCache().clear();
+//    }
+//
+//    /**
+//     * 自定义方法：清除所有 认证缓存
+//     */
+//    public void clearAllCachedAuthenticationInfo() {
+//        getAuthenticationCache().clear();
+//    }
+//
+//    /**
+//     * 自定义方法：清除所有的  认证缓存  和 授权缓存
+//     */
+//    public void clearAllCache() {
+//        clearAllCachedAuthenticationInfo();
+//        clearAllCachedAuthorizationInfo();
+//    }
 
 }

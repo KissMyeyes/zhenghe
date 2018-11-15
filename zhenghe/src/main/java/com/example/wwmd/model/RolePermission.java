@@ -1,49 +1,31 @@
 package com.example.wwmd.model;
 
-import javax.persistence.*;
+import javax.persistence.Column;
+import javax.persistence.Table;
 import java.io.Serializable;
 
 @Table(name = "`role_permission`")
 public class RolePermission extends BaseEntity implements Serializable {
-    @Id
-    @Column(name = "`id`")
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer id;
-
     /**
      * 角色id
      */
     @Column(name = "`role_id`")
-    private Integer roleId;
+    private Long roleId;
 
     /**
-     * 权限id
+     * 菜单/按钮id
      */
     @Column(name = "`permission_id`")
-    private Integer permissionId;
+    private Long permissionId;
 
     private static final long serialVersionUID = 1L;
-
-    /**
-     * @return id
-     */
-    public Integer getId() {
-        return id;
-    }
-
-    /**
-     * @param id
-     */
-    public void setId(Integer id) {
-        this.id = id;
-    }
 
     /**
      * 获取角色id
      *
      * @return role_id - 角色id
      */
-    public Integer getRoleId() {
+    public Long getRoleId() {
         return roleId;
     }
 
@@ -52,25 +34,25 @@ public class RolePermission extends BaseEntity implements Serializable {
      *
      * @param roleId 角色id
      */
-    public void setRoleId(Integer roleId) {
+    public void setRoleId(Long roleId) {
         this.roleId = roleId;
     }
 
     /**
-     * 获取权限id
+     * 获取菜单/按钮id
      *
-     * @return permission_id - 权限id
+     * @return permission_id - 菜单/按钮id
      */
-    public Integer getPermissionId() {
+    public Long getPermissionId() {
         return permissionId;
     }
 
     /**
-     * 设置权限id
+     * 设置菜单/按钮id
      *
-     * @param permissionId 权限id
+     * @param permissionId 菜单/按钮id
      */
-    public void setPermissionId(Integer permissionId) {
+    public void setPermissionId(Long permissionId) {
         this.permissionId = permissionId;
     }
 }

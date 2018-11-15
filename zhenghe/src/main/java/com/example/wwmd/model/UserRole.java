@@ -1,62 +1,58 @@
 package com.example.wwmd.model;
 
-import javax.persistence.*;
+import javax.persistence.Column;
+import javax.persistence.Table;
 import java.io.Serializable;
 
 @Table(name = "`user_role`")
 public class UserRole extends BaseEntity implements Serializable {
-    @Id
-    @Column(name = "`id`")
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer id;
-
+    /**
+     * 用户id
+     */
     @Column(name = "`user_id`")
     private Long userId;
 
+    /**
+     * 角色id
+     */
     @Column(name = "`role_id`")
-    private Integer roleId;
+    private Long roleId;
 
     private static final long serialVersionUID = 1L;
 
     /**
-     * @return id
-     */
-    public Integer getId() {
-        return id;
-    }
-
-    /**
-     * @param id
-     */
-    public void setId(Integer id) {
-        this.id = id;
-    }
-
-    /**
-     * @return user_id
+     * 获取用户id
+     *
+     * @return user_id - 用户id
      */
     public Long getUserId() {
         return userId;
     }
 
     /**
-     * @param userId
+     * 设置用户id
+     *
+     * @param userId 用户id
      */
     public void setUserId(Long userId) {
         this.userId = userId;
     }
 
     /**
-     * @return role_id
+     * 获取角色id
+     *
+     * @return role_id - 角色id
      */
-    public Integer getRoleId() {
+    public Long getRoleId() {
         return roleId;
     }
 
     /**
-     * @param roleId
+     * 设置角色id
+     *
+     * @param roleId 角色id
      */
-    public void setRoleId(Integer roleId) {
+    public void setRoleId(Long roleId) {
         this.roleId = roleId;
     }
 }

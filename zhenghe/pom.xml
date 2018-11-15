@@ -51,6 +51,10 @@
         </dependency>
         <dependency>
             <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-thymeleaf</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-test</artifactId>
             <scope>test</scope>
         </dependency>
@@ -72,11 +76,23 @@
             <artifactId>shiro-spring-boot-web-starter</artifactId>
             <version>1.4.0</version>
         </dependency>
+        <!-- shiro-redis 依赖老版本，导致报错 -->
+        <!--<dependency>-->
+        <!--<groupId>org.apache.shiro</groupId>-->
+        <!--<artifactId>shiro-spring</artifactId>-->
+        <!--<version>1.4.0</version>-->
+        <!--</dependency>-->
         <!--使用Redis 实现 ShiroSession 单点登录-->
         <dependency>
             <groupId>org.crazycake</groupId>
             <artifactId>shiro-redis</artifactId>
             <version>3.1.0</version>
+            <exclusions>
+                <exclusion>
+                    <groupId>org.apache.shiro</groupId>
+                    <artifactId>shiro-core</artifactId><!--无需指定要排除项目的版本号-->
+                </exclusion>
+            </exclusions>
         </dependency>
         <!--Mybatis 依赖 start -->
         <dependency>

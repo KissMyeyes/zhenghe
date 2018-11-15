@@ -1,22 +1,13 @@
 package com.example.wwmd.model;
 
-import java.io.Serializable;
 import javax.persistence.*;
+import java.io.Serializable;
+import java.util.Date;
 
-@Table(name = "`sys_permission`")
+@Table(name = "`permission`")
 public class Permission extends BaseEntity implements Serializable {
-
     /**
-     * 权限类型：菜单
-     */
-    public static int PTYPE_MENU = 1;
-    /**
-     * 权限类型：按钮
-     */
-    public static int PTYPE_BUTTON = 2;
-
-    /**
-     * 主键
+     * 菜单/按钮id
      */
     @Id
     @Column(name = "`id`")
@@ -24,19 +15,19 @@ public class Permission extends BaseEntity implements Serializable {
     private Long id;
 
     /**
-     * 资源名称
+     * 上级菜单id
      */
-    @Column(name = "`name`")
-    private String name;
+    @Column(name = "`parent_id`")
+    private Long parentId;
 
     /**
-     * 资源类型：menu,button,
+     * 菜单/按钮名称
      */
-    @Column(name = "`type`")
-    private String type;
+    @Column(name = "`permission_name`")
+    private String permissionName;
 
     /**
-     * 访问url地址
+     * 菜单url
      */
     @Column(name = "`url`")
     private String url;
@@ -44,102 +35,108 @@ public class Permission extends BaseEntity implements Serializable {
     /**
      * 权限代码字符串
      */
-    @Column(name = "`per_code`")
-    private String perCode;
+    @Column(name = "`perms`")
+    private String perms;
 
     /**
-     * 父结点id
+     * 图标
      */
-    @Column(name = "`parent_id`")
-    private Long parentId;
+    @Column(name = "`icon`")
+    private String icon;
 
     /**
-     * 父结点id列表串
+     * 类型 0菜单 1按钮
      */
-    @Column(name = "`parent_ids`")
-    private String parentIds;
+    @Column(name = "`type`")
+    private String type;
 
     /**
-     * 排序号
+     * 排序
      */
-    @Column(name = "`sorted`")
-    private String sorted;
+    @Column(name = "`order_num`")
+    private Long orderNum;
 
     /**
-     * 是否可用,1：可用，0不可用
+     * 创建时间
      */
-    @Column(name = "`available`")
-    private String available;
+    @Column(name = "`create_time`")
+    private Date createTime;
+
+    /**
+     * 修改时间
+     */
+    @Column(name = "`modify_time`")
+    private Date modifyTime;
 
     private static final long serialVersionUID = 1L;
 
     /**
-     * 获取主键
+     * 获取菜单/按钮id
      *
-     * @return id - 主键
+     * @return id - 菜单/按钮id
      */
     public Long getId() {
         return id;
     }
 
     /**
-     * 设置主键
+     * 设置菜单/按钮id
      *
-     * @param id 主键
+     * @param id 菜单/按钮id
      */
     public void setId(Long id) {
         this.id = id;
     }
 
     /**
-     * 获取资源名称
+     * 获取上级菜单id
      *
-     * @return name - 资源名称
+     * @return parent_id - 上级菜单id
      */
-    public String getName() {
-        return name;
+    public Long getParentId() {
+        return parentId;
     }
 
     /**
-     * 设置资源名称
+     * 设置上级菜单id
      *
-     * @param name 资源名称
+     * @param parentId 上级菜单id
      */
-    public void setName(String name) {
-        this.name = name;
+    public void setParentId(Long parentId) {
+        this.parentId = parentId;
     }
 
     /**
-     * 获取资源类型：menu,button,
+     * 获取菜单/按钮名称
      *
-     * @return type - 资源类型：menu,button,
+     * @return permission_name - 菜单/按钮名称
      */
-    public String getType() {
-        return type;
+    public String getPermissionName() {
+        return permissionName;
     }
 
     /**
-     * 设置资源类型：menu,button,
+     * 设置菜单/按钮名称
      *
-     * @param type 资源类型：menu,button,
+     * @param permissionName 菜单/按钮名称
      */
-    public void setType(String type) {
-        this.type = type;
+    public void setPermissionName(String permissionName) {
+        this.permissionName = permissionName;
     }
 
     /**
-     * 获取访问url地址
+     * 获取菜单url
      *
-     * @return url - 访问url地址
+     * @return url - 菜单url
      */
     public String getUrl() {
         return url;
     }
 
     /**
-     * 设置访问url地址
+     * 设置菜单url
      *
-     * @param url 访问url地址
+     * @param url 菜单url
      */
     public void setUrl(String url) {
         this.url = url;
@@ -148,90 +145,108 @@ public class Permission extends BaseEntity implements Serializable {
     /**
      * 获取权限代码字符串
      *
-     * @return per_code - 权限代码字符串
+     * @return perms - 权限代码字符串
      */
-    public String getPerCode() {
-        return perCode;
+    public String getPerms() {
+        return perms;
     }
 
     /**
      * 设置权限代码字符串
      *
-     * @param perCode 权限代码字符串
+     * @param perms 权限代码字符串
      */
-    public void setPerCode(String perCode) {
-        this.perCode = perCode;
+    public void setPerms(String perms) {
+        this.perms = perms;
     }
 
     /**
-     * 获取父结点id
+     * 获取图标
      *
-     * @return parent_id - 父结点id
+     * @return icon - 图标
      */
-    public Long getParentId() {
-        return parentId;
+    public String getIcon() {
+        return icon;
     }
 
     /**
-     * 设置父结点id
+     * 设置图标
      *
-     * @param parentId 父结点id
+     * @param icon 图标
      */
-    public void setParentId(Long parentId) {
-        this.parentId = parentId;
+    public void setIcon(String icon) {
+        this.icon = icon;
     }
 
     /**
-     * 获取父结点id列表串
+     * 获取类型 0菜单 1按钮
      *
-     * @return parent_ids - 父结点id列表串
+     * @return type - 类型 0菜单 1按钮
      */
-    public String getParentIds() {
-        return parentIds;
+    public String getType() {
+        return type;
     }
 
     /**
-     * 设置父结点id列表串
+     * 设置类型 0菜单 1按钮
      *
-     * @param parentIds 父结点id列表串
+     * @param type 类型 0菜单 1按钮
      */
-    public void setParentIds(String parentIds) {
-        this.parentIds = parentIds;
+    public void setType(String type) {
+        this.type = type;
     }
 
     /**
-     * 获取排序号
+     * 获取排序
      *
-     * @return sorted - 排序号
+     * @return order_num - 排序
      */
-    public String getSorted() {
-        return sorted;
+    public Long getOrderNum() {
+        return orderNum;
     }
 
     /**
-     * 设置排序号
+     * 设置排序
      *
-     * @param sorted 排序号
+     * @param orderNum 排序
      */
-    public void setSorted(String sorted) {
-        this.sorted = sorted;
+    public void setOrderNum(Long orderNum) {
+        this.orderNum = orderNum;
     }
 
     /**
-     * 获取是否可用,1：可用，0不可用
+     * 获取创建时间
      *
-     * @return available - 是否可用,1：可用，0不可用
+     * @return create_time - 创建时间
      */
-    public String getAvailable() {
-        return available;
+    public Date getCreateTime() {
+        return createTime;
     }
 
     /**
-     * 设置是否可用,1：可用，0不可用
+     * 设置创建时间
      *
-     * @param available 是否可用,1：可用，0不可用
+     * @param createTime 创建时间
      */
-    public void setAvailable(String available) {
-        this.available = available;
+    public void setCreateTime(Date createTime) {
+        this.createTime = createTime;
+    }
+
+    /**
+     * 获取修改时间
+     *
+     * @return modify_time - 修改时间
+     */
+    public Date getModifyTime() {
+        return modifyTime;
+    }
+
+    /**
+     * 设置修改时间
+     *
+     * @param modifyTime 修改时间
+     */
+    public void setModifyTime(Date modifyTime) {
+        this.modifyTime = modifyTime;
     }
 }

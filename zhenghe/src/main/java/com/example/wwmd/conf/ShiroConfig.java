@@ -88,24 +88,7 @@ public class ShiroConfig {
         return redisCacheManager;
     }
 
-    /**
-     * 配置核心安全事务管理器
-     *
-     * @return
-     */
-    @Bean
-    public SecurityManager securityManager() {
-        DefaultWebSecurityManager securityManager = new DefaultWebSecurityManager();
-        // 配置 SecurityManager，并注入 shiroRealm
-        securityManager.setRealm(shiroRealm());
-        // 配置 rememberMeCookie
-        securityManager.setRememberMeManager(rememberMeManager());
-        // 配置 缓存管理类 cacheManager
-        securityManager.setCacheManager(cacheManager());
-        //配置自定义session管理，使用redis
-        securityManager.setSessionManager(sessionManager());
-        return securityManager;
-    }
+
 
     /**
      * session 管理对象
@@ -154,6 +137,28 @@ public class ShiroConfig {
         return redisSessionDAO;
     }
 
+
+    /**
+     * 配置核心安全事务管理器
+     * DefaultWebSecurityManager   返回 SecurityManager 类型会报错
+     * 找不到 authenticator，实际上DefaultWebSecurityManager 已经初始化了
+     *
+     * @return
+     */
+    @Bean
+    public DefaultWebSecurityManager securityManager() {
+        DefaultWebSecurityManager securityManager = new DefaultWebSecurityManager();
+        // 配置 SecurityManager，并注入 shiroRealm
+        securityManager.setRealm(shiroRealm());
+        // 配置 rememberMeCookie
+        securityManager.setRememberMeManager(rememberMeManager());
+        // 配置 缓存管理类 cacheManager
+        securityManager.setCacheManager(cacheManager());
+        //配置自定义session管理，使用redis
+        securityManager.setSessionManager(sessionManager());
+        return securityManager;
+    }
+
     /**
      * ShiroFilterFactoryBean 处理拦截资源文件问题。
      * 注意：初始化ShiroFilterFactoryBean的时候需要注入：SecurityManager
@@ -166,6 +171,7 @@ public class ShiroConfig {
      * @return
      */
     @Bean
+    @DependsOn({"securityManager"})
     public ShiroFilterFactoryBean shiroFilterFactoryBean(SecurityManager securityManager) {
         ShiroFilterFactoryBean shiroFilterFactoryBean = new ShiroFilterFactoryBean();
         // 设置 securityManager
@@ -305,7 +311,7 @@ public class ShiroConfig {
     /**
      * 开启shiro 注解模式
      * 可以在controller中的方法前加上注解
-     * 如 @RequiresPermissions("userInfo:add")
+     * 如 @RequiresPermissions("user:add")
      *
      * @param securityManager
      * @return

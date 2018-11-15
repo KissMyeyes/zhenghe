@@ -1,26 +1,18 @@
 package com.example.wwmd.model;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
-
 import javax.persistence.*;
 import java.io.Serializable;
-import java.util.List;
+import java.util.Date;
 
-@Table(name = "`sys_user`")
+@Table(name = "`user`")
 public class User extends BaseEntity implements Serializable {
     /**
-     * 主键
+     * 用户id
      */
     @Id
     @Column(name = "`id`")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-
-    /**
-     * 账号
-     */
-    @Column(name = "`user_code`")
-    private String userCode;
 
     /**
      * 姓名
@@ -29,70 +21,101 @@ public class User extends BaseEntity implements Serializable {
     private String userName;
 
     /**
+     * 账号
+     */
+    @Column(name = "`real_name`")
+    private String realName;
+
+    /**
      * 密码
      */
     @Column(name = "`password`")
-    @JsonIgnore
     private String password;
 
     /**
-     * 盐
+     * 部门id
      */
-    @Column(name = "`salt`")
-    private String salt;
+    @Column(name = "`dept_id`")
+    private Long deptId;
 
     /**
-     * 账号是否锁定，1：锁定，0未锁定
+     * 邮箱
+     */
+    @Column(name = "`email`")
+    private String email;
+
+    /**
+     * 联系电话
+     */
+    @Column(name = "`mobile`")
+    private String mobile;
+
+    /**
+     * 状态 0锁定 1有效
      */
     @Column(name = "`locked`")
-    private Boolean locked;
+    private String locked;
 
-    private List<Role> roles;
+    /**
+     * 创建时间
+     */
+    @Column(name = "`crate_time`")
+    private Date crateTime;
 
-    public List<Role> getRoles() {
-        return roles;
-    }
+    /**
+     * 修改时间
+     */
+    @Column(name = "`modify_time`")
+    private Date modifyTime;
 
-    public void setRoles(List<Role> roles) {
-        this.roles = roles;
-    }
+    /**
+     * 最近访问时间
+     */
+    @Column(name = "`last_login_time`")
+    private Date lastLoginTime;
+
+    /**
+     * 性别 0男 1女
+     */
+    @Column(name = "`ssex`")
+    private String ssex;
+
+    /**
+     * 主题
+     */
+    @Column(name = "`theme`")
+    private String theme;
+
+    /**
+     * 头像
+     */
+    @Column(name = "`avatar`")
+    private String avatar;
+
+    /**
+     * 描述
+     */
+    @Column(name = "`description`")
+    private String description;
 
     private static final long serialVersionUID = 1L;
 
     /**
-     * 获取主键
+     * 获取用户id
      *
-     * @return id - 主键
+     * @return id - 用户id
      */
     public Long getId() {
         return id;
     }
 
     /**
-     * 设置主键
+     * 设置用户id
      *
-     * @param id 主键
+     * @param id 用户id
      */
     public void setId(Long id) {
         this.id = id;
-    }
-
-    /**
-     * 获取账号
-     *
-     * @return user_code - 账号
-     */
-    public String getUserCode() {
-        return userCode;
-    }
-
-    /**
-     * 设置账号
-     *
-     * @param userCode 账号
-     */
-    public void setUserCode(String userCode) {
-        this.userCode = userCode;
     }
 
     /**
@@ -114,6 +137,24 @@ public class User extends BaseEntity implements Serializable {
     }
 
     /**
+     * 获取账号
+     *
+     * @return real_name - 账号
+     */
+    public String getRealName() {
+        return realName;
+    }
+
+    /**
+     * 设置账号
+     *
+     * @param realName 账号
+     */
+    public void setRealName(String realName) {
+        this.realName = realName;
+    }
+
+    /**
      * 获取密码
      *
      * @return password - 密码
@@ -132,38 +173,200 @@ public class User extends BaseEntity implements Serializable {
     }
 
     /**
-     * 获取盐
+     * 获取部门id
      *
-     * @return salt - 盐
+     * @return dept_id - 部门id
      */
-    public String getSalt() {
-        return salt;
+    public Long getDeptId() {
+        return deptId;
     }
 
     /**
-     * 设置盐
+     * 设置部门id
      *
-     * @param salt 盐
+     * @param deptId 部门id
      */
-    public void setSalt(String salt) {
-        this.salt = salt;
+    public void setDeptId(Long deptId) {
+        this.deptId = deptId;
     }
 
     /**
-     * 获取账号是否锁定，1：锁定，0未锁定
+     * 获取邮箱
      *
-     * @return locked - 账号是否锁定，1：锁定，0未锁定
+     * @return email - 邮箱
      */
-    public Boolean getLocked() {
+    public String getEmail() {
+        return email;
+    }
+
+    /**
+     * 设置邮箱
+     *
+     * @param email 邮箱
+     */
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
+    /**
+     * 获取联系电话
+     *
+     * @return mobile - 联系电话
+     */
+    public String getMobile() {
+        return mobile;
+    }
+
+    /**
+     * 设置联系电话
+     *
+     * @param mobile 联系电话
+     */
+    public void setMobile(String mobile) {
+        this.mobile = mobile;
+    }
+
+    /**
+     * 获取状态 0锁定 1有效
+     *
+     * @return locked - 状态 0锁定 1有效
+     */
+    public String getLocked() {
         return locked;
     }
 
     /**
-     * 设置账号是否锁定，1：锁定，0未锁定
+     * 设置状态 0锁定 1有效
      *
-     * @param locked 账号是否锁定，1：锁定，0未锁定
+     * @param locked 状态 0锁定 1有效
      */
-    public void setLocked(Boolean locked) {
+    public void setLocked(String locked) {
         this.locked = locked;
+    }
+
+    /**
+     * 获取创建时间
+     *
+     * @return crate_time - 创建时间
+     */
+    public Date getCrateTime() {
+        return crateTime;
+    }
+
+    /**
+     * 设置创建时间
+     *
+     * @param crateTime 创建时间
+     */
+    public void setCrateTime(Date crateTime) {
+        this.crateTime = crateTime;
+    }
+
+    /**
+     * 获取修改时间
+     *
+     * @return modify_time - 修改时间
+     */
+    public Date getModifyTime() {
+        return modifyTime;
+    }
+
+    /**
+     * 设置修改时间
+     *
+     * @param modifyTime 修改时间
+     */
+    public void setModifyTime(Date modifyTime) {
+        this.modifyTime = modifyTime;
+    }
+
+    /**
+     * 获取最近访问时间
+     *
+     * @return last_login_time - 最近访问时间
+     */
+    public Date getLastLoginTime() {
+        return lastLoginTime;
+    }
+
+    /**
+     * 设置最近访问时间
+     *
+     * @param lastLoginTime 最近访问时间
+     */
+    public void setLastLoginTime(Date lastLoginTime) {
+        this.lastLoginTime = lastLoginTime;
+    }
+
+    /**
+     * 获取性别 0男 1女
+     *
+     * @return ssex - 性别 0男 1女
+     */
+    public String getSsex() {
+        return ssex;
+    }
+
+    /**
+     * 设置性别 0男 1女
+     *
+     * @param ssex 性别 0男 1女
+     */
+    public void setSsex(String ssex) {
+        this.ssex = ssex;
+    }
+
+    /**
+     * 获取主题
+     *
+     * @return theme - 主题
+     */
+    public String getTheme() {
+        return theme;
+    }
+
+    /**
+     * 设置主题
+     *
+     * @param theme 主题
+     */
+    public void setTheme(String theme) {
+        this.theme = theme;
+    }
+
+    /**
+     * 获取头像
+     *
+     * @return avatar - 头像
+     */
+    public String getAvatar() {
+        return avatar;
+    }
+
+    /**
+     * 设置头像
+     *
+     * @param avatar 头像
+     */
+    public void setAvatar(String avatar) {
+        this.avatar = avatar;
+    }
+
+    /**
+     * 获取描述
+     *
+     * @return description - 描述
+     */
+    public String getDescription() {
+        return description;
+    }
+
+    /**
+     * 设置描述
+     *
+     * @param description 描述
+     */
+    public void setDescription(String description) {
+        this.description = description;
     }
 }

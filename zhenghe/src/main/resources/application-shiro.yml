@@ -1,12 +1,12 @@
-shiro:
-  loginUrl: /page/401         # 用户未登录时跳转的请求路径
-  unauthorizedUrl: /page/403  # 用户没有访问权限时跳转的请求路径
-  userNativeSessionManager: true #  如果启用，Shiro将管理HTTP会话而不是容器
-  sessionManager:
-    cookie:
-      name: BIUSID
+#shiro:
+#  loginUrl: /page/401         # 用户未登录时跳转的请求路径
+#  unauthorizedUrl: /page/403  # 用户没有访问权限时跳转的请求路径
+#  userNativeSessionManager: true #  如果启用，Shiro将管理HTTP会话而不是容器
+#  sessionManager:
+#    cookie:
+#      name: BIUSID
 
-# febs 配置
+# shiro 本地配置
 wwmd:
   shiro:
     # shiro redis缓存时长，默认1800秒
