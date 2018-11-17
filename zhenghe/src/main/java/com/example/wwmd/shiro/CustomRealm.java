@@ -47,6 +47,24 @@ public class CustomRealm extends AuthorizingRealm {
 //        this.setCredentialsMatcher(hashMatcher);
 //    }
 
+
+//    @Override
+//    protected AuthorizationInfo doGetAuthorizationInfo(PrincipalCollection principals) {
+//        //null usernames are invalid
+//        if (principals == null) {
+//            throw new AuthorizationException("PrincipalCollection method argument cannot be null.");
+//        }
+//
+//        User user = (User) getAvailablePrincipal(principals);
+//
+//        SimpleAuthorizationInfo info = new SimpleAuthorizationInfo();
+//        System.out.println("获取角色信息：" + user.getRoles());
+//        System.out.println("获取权限信息：" + user.getPerms());
+//        info.setRoles(user.getRoles());
+//        info.setStringPermissions(user.getPerms());
+//        return info;
+//    }
+
     /**
      * 授权模块，获取用户角色和权限
      * 定义如何获取用户的角色和权限的逻辑，给shiro做权限判断
@@ -75,23 +93,6 @@ public class CustomRealm extends AuthorizingRealm {
      * @param principal principal
      * @return AuthorizationInfo 权限信息
      */
-
-//    @Override
-//    protected AuthorizationInfo doGetAuthorizationInfo(PrincipalCollection principals) {
-//        //null usernames are invalid
-//        if (principals == null) {
-//            throw new AuthorizationException("PrincipalCollection method argument cannot be null.");
-//        }
-//
-//        User user = (User) getAvailablePrincipal(principals);
-//
-//        SimpleAuthorizationInfo info = new SimpleAuthorizationInfo();
-//        System.out.println("获取角色信息：" + user.getRoles());
-//        System.out.println("获取权限信息：" + user.getPerms());
-//        info.setRoles(user.getRoles());
-//        info.setStringPermissions(user.getPerms());
-//        return info;
-//    }
     @Override
     protected AuthorizationInfo doGetAuthorizationInfo(PrincipalCollection principal) {
         //null usernames are invalid

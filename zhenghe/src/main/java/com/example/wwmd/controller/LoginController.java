@@ -47,16 +47,16 @@ public class LoginController extends BaseController {
     @PostMapping("/login")
     @ResponseBody
     public ResultView login(String username, String password, String code, Boolean rememberMe) {
-        if (!StringUtils.isEmpty(code)) {
+        if (StringUtils.isEmpty(code)) {
             return ResultView.newFailed(ErrorCodeEnum.PARAM_ERROR);
 //            return ResultView.warn("验证码不能为空！");
         }
         Session session = super.getSession();
         String sessionCode = (String) session.getAttribute(CODE_KEY);
-        if (!code.equalsIgnoreCase(sessionCode)) {
-            return ResultView.newFailed(ErrorCodeEnum.PARAM_ERROR);
-//            return ResultView.warn("验证码错误！");
-        }
+//        if (!code.equalsIgnoreCase(sessionCode)) {
+//            return ResultView.newFailed(ErrorCodeEnum.PARAM_ERROR);
+////            return ResultView.warn("验证码错误！");
+//        }
         // 密码 MD5 加密
         password = MD5Utils.encrypt(username.toLowerCase(), password);
         UsernamePasswordToken token = new UsernamePasswordToken(username, password, rememberMe);

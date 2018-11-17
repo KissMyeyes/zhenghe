@@ -85,9 +85,9 @@ public class ShiroConfig {
         redisCacheManager.setRedisManager(redisManager());
 //        Default value is authCacheKey or id, that means your principal object has a method called \"getAuthCacheKey()\" or \"getId()\"";
 //        redisCacheManager.setPrincipalIdFieldName();
+//        redisCacheManager.setValueSerializer(new MyGsonRedisSerializer());
         return redisCacheManager;
     }
-
 
 
     /**
@@ -228,7 +228,9 @@ public class ShiroConfig {
         //缓存AuthorizationInfo信息的缓存名称  在ehcache-shiro.xml中有对应缓存的配置
         shiroRealm.setAuthorizationCacheName("authorizationCache");
         //配置自定义密码比较器
-        shiroRealm.setCredentialsMatcher(retryLimitHashedCredentialsMatcher());
+//        shiroRealm.setCredentialsMatcher(retryLimitHashedCredentialsMatcher());
+//        shiroRealm.setCredentialsMatcher(new AllowAllCredentialsMatcher());
+
 
         return shiroRealm;
     }
@@ -244,20 +246,12 @@ public class ShiroConfig {
 //        retryLimitHashedCredentialsMatcher.setRedisManager(redisManager());
 
         //如果密码加密,可以打开下面配置
-        //加密算法的名称
-        //retryLimitHashedCredentialsMatcher.setHashAlgorithmName("MD5");
-        //配置加密的次数
-        //retryLimitHashedCredentialsMatcher.setHashIterations(1024);
-        //是否存储为16进制
-        //retryLimitHashedCredentialsMatcher.setStoredCredentialsHexEncoded(true);
-//        return retryLimitHashedCredentialsMatcher;
-
         //告诉shiro如何根据获取到的用户信息中的密码和盐值来校验密码
         //设置用于匹配密码的CredentialsMatcher
         HashedCredentialsMatcher hashMatcher = new HashedCredentialsMatcher();
-        hashMatcher.setHashAlgorithmName(Md5Hash.ALGORITHM_NAME);//Sha256Hash.ALGORITHM_NAME
-        hashMatcher.setStoredCredentialsHexEncoded(false);
-        hashMatcher.setHashIterations(1024);
+        hashMatcher.setHashAlgorithmName(Md5Hash.ALGORITHM_NAME);//加密算法的名称
+        hashMatcher.setStoredCredentialsHexEncoded(false);//是否存储为16进制
+//        hashMatcher.setHashIterations(1024); //配置加密的次数，不需要再散列
         return hashMatcher;
     }
 
