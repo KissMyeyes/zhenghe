@@ -1,7 +1,7 @@
 package com.example.wwmd.model;
 
-import java.io.Serializable;
 import javax.persistence.*;
+import java.io.Serializable;
 
 @Table(name = "`country`")
 public class Country extends BaseEntity implements Serializable {
@@ -79,18 +79,5 @@ public class Country extends BaseEntity implements Serializable {
      */
     public void setCountrycode(String countrycode) {
         this.countrycode = countrycode;
-    }
-
-
-    @Override
-    public String toString() {
-        final StringBuilder sb = new StringBuilder("Country{");
-        sb.append("id=").append(id);
-        sb.append(", countryname='").append(countryname).append('\'');
-        sb.append(", countrycode='").append(countrycode).append('\'');
-        sb.append(", page='").append(super.getPage()).append('\'');
-        sb.append(", rows='").append(super.getRows()).append('\'');
-        sb.append('}');
-        return sb.toString();
     }
 }
