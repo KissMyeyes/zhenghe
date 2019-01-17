@@ -67,6 +67,7 @@ public class CustomRealm extends AuthorizingRealm {
 
     /**
      * 授权模块，获取用户角色和权限
+     *
      * 定义如何获取用户的角色和权限的逻辑，给shiro做权限判断
      * <p>
      * 授权用户权限

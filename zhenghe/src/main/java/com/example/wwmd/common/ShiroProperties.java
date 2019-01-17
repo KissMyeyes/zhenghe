@@ -1,5 +1,16 @@
 package com.example.wwmd.common;
 
+import com.example.wwmd.conf.ShiroConfig;
+import lombok.Data;
+
+/**
+ * shiro init用到的配置项
+ *
+ * @see ShiroConfig#shiroFilterFactoryBean(org.apache.shiro.mgt.SecurityManager)
+ * Shiro 特有的拦截机制。
+ */
+
+@Data
 public class ShiroProperties {
 
     // shiro redis缓存时长，默认值 1800 秒
@@ -9,7 +20,7 @@ public class ShiroProperties {
     // rememberMe 有效时长，默认为 86400 秒，即一天
     private int cookieTimeout = 86400;
 
-    private String anonUrl;
+    private String anonUrl;   //设置免认证 url
 
     private String loginUrl = "/login";
 
@@ -18,68 +29,4 @@ public class ShiroProperties {
     private String logoutUrl = "/logout";
 
     private String unauthorizedUrl;
-
-    public int getExpireIn() {
-        return expireIn;
-    }
-
-    public void setExpireIn(int expireIn) {
-        this.expireIn = expireIn;
-    }
-
-    public long getSessionTimeout() {
-        return sessionTimeout;
-    }
-
-    public void setSessionTimeout(long sessionTimeout) {
-        this.sessionTimeout = sessionTimeout;
-    }
-
-    public int getCookieTimeout() {
-        return cookieTimeout;
-    }
-
-    public void setCookieTimeout(int cookieTimeout) {
-        this.cookieTimeout = cookieTimeout;
-    }
-
-    public String getAnonUrl() {
-        return anonUrl;
-    }
-
-    public void setAnonUrl(String anonUrl) {
-        this.anonUrl = anonUrl;
-    }
-
-    public String getLoginUrl() {
-        return loginUrl;
-    }
-
-    public void setLoginUrl(String loginUrl) {
-        this.loginUrl = loginUrl;
-    }
-
-    public String getLogoutUrl() {
-        return logoutUrl;
-    }
-
-    public void setLogoutUrl(String logoutUrl) {
-        this.logoutUrl = logoutUrl;
-    }
-
-    public String getSuccessUrl() {
-        return successUrl;
-    }
-
-    public void setSuccessUrl(String successUrl) {
-        this.successUrl = successUrl;
-    }
-
-    public String getUnauthorizedUrl() {
-        return unauthorizedUrl;
-    }
-
-    public void setUnauthorizedUrl(String unauthorizedUrl) {
-        this.unauthorizedUrl = unauthorizedUrl;
-    }
 }

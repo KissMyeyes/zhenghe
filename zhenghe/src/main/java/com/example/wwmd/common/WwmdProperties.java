@@ -1,8 +1,15 @@
 package com.example.wwmd.common;
 
+import lombok.Data;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.context.annotation.Configuration;
 
+/**
+ * 总配置类
+ * 使用 注解 @Configuration 自动注入
+ * 使用 注解 ConfigurationProperties 匹配yml的wwmd 配置节点
+ */
+@Data
 @Configuration
 @ConfigurationProperties(prefix = "wwmd")
 public class WwmdProperties {
@@ -15,35 +22,4 @@ public class WwmdProperties {
 
     private boolean openAopLog = true;
 
-    public ShiroProperties getShiro() {
-        return shiro;
-    }
-
-    public void setShiro(ShiroProperties shiro) {
-        this.shiro = shiro;
-    }
-
-    public ValidateCodeProperties getValidateCode() {
-        return validateCode;
-    }
-
-    public void setValidateCode(ValidateCodeProperties validateCode) {
-        this.validateCode = validateCode;
-    }
-
-    public String getTimeFormat() {
-        return timeFormat;
-    }
-
-    public void setTimeFormat(String timeFormat) {
-        this.timeFormat = timeFormat;
-    }
-
-    public boolean isOpenAopLog() {
-        return openAopLog;
-    }
-
-    public void setOpenAopLog(boolean openAopLog) {
-        this.openAopLog = openAopLog;
-    }
 }

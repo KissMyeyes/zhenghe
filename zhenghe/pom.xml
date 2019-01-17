@@ -83,10 +83,22 @@
         <!--<version>1.4.0</version>-->
         <!--</dependency>-->
         <!--使用Redis 实现 ShiroSession 单点登录-->
+        <!--<dependency>-->
+        <!--<groupId>org.crazycake</groupId>-->
+        <!--<artifactId>shiro-redis</artifactId>-->
+        <!--<version>3.1.0</version>-->
+        <!--<exclusions>-->
+        <!--<exclusion>-->
+        <!--<groupId>org.apache.shiro</groupId>-->
+        <!--<artifactId>shiro-core</artifactId>&lt;!&ndash;无需指定要排除项目的版本号&ndash;&gt;-->
+        <!--</exclusion>-->
+        <!--</exclusions>-->
+        <!--</dependency>-->
+        <!-- https://mvnrepository.com/artifact/org.crazycake/shiro-redis -->
         <dependency>
             <groupId>org.crazycake</groupId>
             <artifactId>shiro-redis</artifactId>
-            <version>3.1.0</version>
+            <version>3.2.2</version>
             <exclusions>
                 <exclusion>
                     <groupId>org.apache.shiro</groupId>
@@ -94,6 +106,7 @@
                 </exclusion>
             </exclusions>
         </dependency>
+
         <!--Mybatis 依赖 start -->
         <dependency>
             <groupId>org.mybatis.spring.boot</groupId>
@@ -182,6 +195,14 @@
             <groupId>org.apache.commons</groupId>
             <artifactId>commons-lang3</artifactId>
         </dependency>
+        <!-- https://mvnrepository.com/artifact/org.projectlombok/lombok -->
+        <dependency>
+            <groupId>org.projectlombok</groupId>
+            <artifactId>lombok</artifactId>
+            <version>[1.18.4,)</version>
+            <scope>provided</scope>
+        </dependency>
+
     </dependencies>
 
     <build>

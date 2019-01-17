@@ -3,6 +3,7 @@ package com.example.wwmd.conf;
 import com.example.wwmd.common.WwmdProperties;
 import com.example.wwmd.listener.ShiroSessionListener;
 import com.example.wwmd.shiro.CustomRealm;
+import com.example.wwmd.shiro.MyGsonRedisSerializer;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.shiro.authc.credential.HashedCredentialsMatcher;
 import org.apache.shiro.codec.Base64;
@@ -72,8 +73,8 @@ public class ShiroConfig {
         RedisManager redisManager = new RedisManager();
         // 缓存时间，单位为秒
         //redisManager.setExpire(wwmdProperties.getShiro().getExpireIn()); // removed from shiro-redis v3.1.0 api
-        redisManager.setHost(host);
-        redisManager.setPort(port);
+//        redisManager.setHost(host);//  默认 127.0.0.1:6379
+//        redisManager.setPort(port);
         if (!StringUtils.isEmpty(password))
             redisManager.setPassword(password);
         redisManager.setTimeout(timeout);
@@ -85,7 +86,7 @@ public class ShiroConfig {
         redisCacheManager.setRedisManager(redisManager());
 //        Default value is authCacheKey or id, that means your principal object has a method called \"getAuthCacheKey()\" or \"getId()\"";
 //        redisCacheManager.setPrincipalIdFieldName();
-//        redisCacheManager.setValueSerializer(new MyGsonRedisSerializer());
+        redisCacheManager.setValueSerializer(new MyGsonRedisSerializer());
         return redisCacheManager;
     }
 
