@@ -86,7 +86,7 @@ public class ShiroConfig {
         redisCacheManager.setRedisManager(redisManager());
 //        Default value is authCacheKey or id, that means your principal object has a method called \"getAuthCacheKey()\" or \"getId()\"";
 //        redisCacheManager.setPrincipalIdFieldName();
-        redisCacheManager.setValueSerializer(new MyGsonRedisSerializer());
+//        redisCacheManager.setValueSerializer(new MyGsonRedisSerializer());
         return redisCacheManager;
     }
 
