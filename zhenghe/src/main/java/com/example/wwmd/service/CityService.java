@@ -28,6 +28,8 @@ import com.example.wwmd.dao.mapper.CityMapper;
 import com.example.wwmd.model.City;
 import com.github.pagehelper.PageHelper;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cache.annotation.CacheConfig;
+import org.springframework.cache.annotation.CacheEvict;
 import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
 
@@ -39,13 +41,22 @@ import java.util.List;
  * @since 2015-12-19 11:09
  */
 @Service
+@CacheConfig(cacheNames = "city")
 public class CityService {
 
     @Autowired
     private CityMapper cityMapper;
 
 
-    @Cacheable(cacheNames="cities", key="#{city.page+'_'+city.rows}",unless="#result == null")
+    /**
+     * condition : 表示在哪种情况下才缓存结果
+     * unless,哪种情况不缓存
+     * 同样使用SpEL
+     *
+     * @param city
+     * @return
+     */
+    @Cacheable(cacheNames = "city", key = "#{city.page+'_'+city.rows}", unless = "#result == null")
     public List<City> getAll(City city) {
         if (city.getPage() != null && city.getRows() != null) {
             PageHelper.startPage(city.getPage(), city.getRows());
@@ -55,19 +66,26 @@ public class CityService {
 
     /**
      * cacheNames 设置缓存的值
-     *  key：指定缓存的key，这是指参数id值。 key可以使用spEl表达式
+     * key：指定缓存的key，这是指参数id值。 key可以使用spEl表达式
+     *
      * @param id
      * @return
      */
-    @Cacheable(cacheNames="city", key="#id")
+    @Cacheable(cacheNames = "city", key = "#id", condition = "#id != 0")
     public City getById(Integer id) {
         return cityMapper.selectByPrimaryKey(id);
     }
 
+    /**
+     * @param id
+     * @CachePut 方法在执行前不会去检查缓存中是否存在之前执行过的结果，而是每次都会执行该方法，并将执行结果以键值对的形式存入指定的缓存中
+     */
+    @CacheEvict(cacheNames = "city", key = "#id", condition = "#id != 0") // 清空 city key 为id的缓存
     public void deleteById(Integer id) {
         cityMapper.deleteByPrimaryKey(id);
     }
 
+    @CacheEvict(key = "#country.id", condition = "#country.id != null", allEntries = true)
     public void save(City country) {
         if (country.getId() != null) {
             cityMapper.updateByPrimaryKey(country);
