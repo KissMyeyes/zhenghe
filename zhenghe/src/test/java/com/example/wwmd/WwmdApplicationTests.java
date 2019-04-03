@@ -1,8 +1,15 @@
 package com.example.wwmd;
 
+import com.example.wwmd.model.City;
+import com.example.wwmd.service.CityService;
+
+import org.junit.Assert;
 import org.junit.Test;
 import org.junit.runner.RunWith;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.context.ApplicationContext;
+import org.springframework.core.env.Environment;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.test.context.web.WebAppConfiguration;
@@ -18,15 +25,18 @@ import org.springframework.test.context.web.WebAppConfiguration;
  * 	*
  * NONE - 使用SpringApplication加载一个ApplicationContext，但不提供任何servlet环境（不管是mock还是其他）。
  *
- *
  * 注 不要忘记在测试用例上添加@RunWith(SpringRunner.class)，否则该注解将被忽略。
  */
 @RunWith(SpringRunner.class)
 @SpringBootTest
 public class WwmdApplicationTests {
 
+    @Autowired
+    public ApplicationContext context;
+
     @Test
-    public void contextLoads() {
+    public void testNotNull() {
+        Assert.assertNotNull(context.getBean(CityService.class));
     }
 
 }

@@ -9,7 +9,8 @@ spring:
       max-active: 20
       initial-size: 1
     driver-class-name: com.mysql.jdbc.Driver
-    url: jdbc:mysql://localhost:3306/test?useSSL=false
+    # 加入时区 GMT%2B8 代表是东八区  zeroDateTimeBehavior 值为0的timestamp类型
+    url: jdbc:mysql://localhost:3306/test?useSSL=FALSE&serverTimezone=GMT%2B8&useUnicode=true&characterEncoding=UTF-8&zeroDateTimeBehavior=convertToNull&transformedBitIsBoolean=true
     username: root
   redis:
     password:

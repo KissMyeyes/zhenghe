@@ -212,7 +212,8 @@ public class ShiroConfig {
 
     /**
      * 身份认证realm; (这个需要自己写，账号密码校验；权限等)
-     *
+     * Realm 相当于用于安全框架的DAO. {@link CustomRealm }
+     * @see CustomRealm  用户操作域
      * @return
      */
     @Bean
